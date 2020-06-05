@@ -1,0 +1,19 @@
+html, body {
+    height: 100%;
+}
+
+/* Login page */
+.login-card {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+}
+
+.login-form {
+    width: 300px;
+}

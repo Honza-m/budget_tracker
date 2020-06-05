@@ -1,0 +1,8 @@
+html, body {
+    height: 100%;
+}
+
+/* App loyout */
+.container {
+    padding: 40px 20px;
+}
