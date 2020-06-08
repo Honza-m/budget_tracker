@@ -1,6 +1,6 @@
-from django.urls import path
+from django.urls import re_path
 from . import views
 
 urlpatterns = [
-    path('dash/', views.dashboard, name='dashboard')
+    re_path(r'^.*$', views.dashboard, name='dashboard')
 ]

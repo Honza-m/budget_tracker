@@ -1,4 +1,6 @@
 import React from 'react';
+import PaginationRow from './tables/Pagination';
+
 
 class ClientList extends React.Component {
     constructor(props) {
@@ -6,35 +8,48 @@ class ClientList extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
-        }
+            res: [],
+        };
+        this.baseURL = props.base + 'clients/';
+        this.loadData = this.loadData.bind(this);
     }
 
-    componentDidMount() {
-        var x = this
-        $.get("http://127.0.0.1:8000/api/clients/?format=json")
+    loadData(url) {
+        var x = this;
+        const token = localStorage.getItem('auth');
+        $.ajax({
+            url: url,
+            type: 'get',
+            headers: {'Authorization': `Token ${token}`}
+        })
         .done(function(res) {
             x.setState({
                 isLoaded: true,
-                items: res
+                res: res
             });
         })
         .fail(function(res) {
+            console.log(res);
             x.setState({
                 isLoaded: true,
-                error: res
+                error: res.detail
             });
-        });        
+        });     
+    }
+
+    componentDidMount() {
+        this.loadData(this.baseURL)
     }
 
     render() {
-        const { error, isLoaded, items } = this.state;
+        const { error, isLoaded, res } = this.state;
         if (error) {
             return <div>Error: {error}</div>;
         } else if (!isLoaded) {
             return <div>Loading...</div>;
         } else {
             return (
+                <div>
                 <table className="table table-stripped">
                     <thead className="thead-light">
                         <tr>
@@ -43,7 +58,7 @@ class ClientList extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {items.map(item => (
+                        {res.results.map(item => (
                         <tr key={item.id}>
                             <th scope="row">{item.id}</th>
                             <td>{item.name}</td>
@@ -51,6 +66,13 @@ class ClientList extends React.Component {
                         ))}
                     </tbody>
                 </table>
+
+                <PaginationRow
+                    res={res}
+                    baseURL={this.baseURL}
+                    callback={this.loadData}
+                />
+                </div>
             );
         }
     }
