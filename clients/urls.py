@@ -1,12 +1,17 @@
 from rest_framework import routers
-from .views import ClientViewSet, ClientCampaignViewSet
+from django.urls import path
+from . import views
 
 router = routers.SimpleRouter()
-router.register('', ClientViewSet, basename='client')
+router.register('', views.ClientViewSet, basename='client')
 router.register(
     '(?P<client_pk>[^/.]+)/campaigns',
-    ClientCampaignViewSet,
+    views.ClientCampaignViewSet,
     basename='client_campaign'
 )
 
-urlpatterns = router.urls
+urlpatterns = [
+    path('summary/', views.ClientSummaryView.as_view()),
+    path('actions/', views.UserClientsActions.as_view())
+]
+urlpatterns += router.urls

@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, generics, mixins, status, views
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -38,6 +38,62 @@ class ClientViewSet(viewsets.ModelViewSet):
         """ Add client to user's clients on create """
         client = serializer.save()
         self.request.user.clients.add(client)
+
+
+class ClientSummaryView(generics.ListAPIView):
+    """ Get all clients belonging to User with current status info """
+    serializer_class = ClientSerializer
+    pagination_class = FivePerPagePagination
+
+    def get_queryset(self):
+        return self.request.user.clients.all()
+
+
+class UserClientsActions(views.APIView):
+    """ Add or remove clients to/from a user list
+        Expects a JSON like {
+            "action": "add/remove",
+            "ids": [1, 2, 3]
+        }
+    """
+
+    def get_queryset(self):
+        return self.request.user.clients.all()
+
+    def post(self, request, *args, **kwargs):
+        """ Adds or removes clients to/from a user list
+        """
+        # Return 400 if bad JSON
+        if 'action' not in request.data or 'ids' not in request.data:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        # Check all ids exist in organisation
+        org_ids = (
+            Client.objects.filter(organization=request.user.organization)
+            .values_list('pk', flat=True)
+        )
+        for pk in request.data['ids']:
+            if pk not in org_ids:
+                return Response(
+                    f"Client ID {pk} does not exist in your organization.",
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            pass
+
+        clients = Client.objects.filter(pk__in=request.data['ids'])
+        # Add clients to list if asked for
+        if request.data['action'] == 'add':
+            for client in clients.all():
+                request.user.clients.add(client)
+        # Otherwise remove clients from list if asked for
+        elif request.data['action'] == 'remove':
+            for client in clients.all():
+                request.user.clients.remove(client)
+        # Otherwise return 400
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(status=status.HTTP_200_OK)
 
 
 class ClientCampaignViewSet(viewsets.ModelViewSet):

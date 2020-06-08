@@ -7,6 +7,8 @@ PLATFORM_CHOICES = [
 
 
 class Client(mod.Model):
+    class Meta:
+        ordering = ['name']
     """ Entity that you create budgets and campaigns for """
     name = mod.CharField(max_length=200)
     organization = mod.ForeignKey('users.Organization', on_delete=mod.CASCADE)

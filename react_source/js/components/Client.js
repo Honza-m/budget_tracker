@@ -1,7 +1,6 @@
 import React from 'react';
 import PaginationRow from './tables/Pagination';
 
-
 class ClientList extends React.Component {
     constructor(props) {
         super(props);
@@ -10,7 +9,7 @@ class ClientList extends React.Component {
             isLoaded: false,
             res: [],
         };
-        this.baseURL = props.base + 'clients/';
+        this.baseURL = props.base + 'clients/summary/';
         this.loadData = this.loadData.bind(this);
     }
 
@@ -50,6 +49,7 @@ class ClientList extends React.Component {
         } else {
             return (
                 <div>
+                <h1>Your clients</h1>
                 <table className="table table-stripped">
                     <thead className="thead-light">
                         <tr>
