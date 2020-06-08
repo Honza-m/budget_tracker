@@ -36,7 +36,6 @@ class LoginPage extends React.Component {
 			this.setState({token: res.token})
 		})
 		.fail((res) => {
-			console.log(res);
 			this.setState({
 				password: "",
 				error: true

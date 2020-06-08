@@ -25,6 +25,10 @@ function MainApp(props) {
           <Route path="/test/">
             <h1>Test</h1>
           </Route>
+          /* Redirect to dashboard if no url*/
+          <Route path="/">
+            <Redirect to="/dashboard/" />
+          </Route>
         </Switch>
         </div>
       </div>
