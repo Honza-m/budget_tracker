@@ -7,5 +7,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', authviews.obtain_auth_token),
     path('api/clients/', include('clients.urls')),
+    path('api/users/', include('users.urls')),
     path('', include('frontend.urls')),
 ]

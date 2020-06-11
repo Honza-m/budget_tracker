@@ -6,9 +6,10 @@ import {
   Redirect
 } from "react-router-dom";
 
-import ClientList from './Client';
-import Navigation from './Navigation';
-import LogoutPage from './LogoutPage';
+import Dashboard from './dashboard/Dashboard';
+import EditClients from './dashboard/edit_clients/EditClients';
+import Navigation from './main_components/Navigation';
+import LogoutPage from './main_components/LogoutPage';
 
 
 function MainApp(props) {
@@ -18,11 +19,14 @@ function MainApp(props) {
         <Navigation />
         <div className="container">
         <Switch>
-          <Route path="/logout/" component={LogoutPage} />
-        	<Route path="/dashboard/">
-        		<ClientList base={base}/>
+          <Route exact path="/logout/" component={LogoutPage} />
+        	<Route exact path="/dashboard/">
+        		<Dashboard base={base}/>
         	</Route>
-          <Route path="/test/">
+          <Route exact path="/dashboard/select-clients/">
+            <EditClients base={base}/>
+          </Route>
+          <Route exact path="/test/">
             <h1>Test</h1>
           </Route>
           /* Redirect to dashboard if no url*/

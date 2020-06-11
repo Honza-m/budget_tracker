@@ -1,0 +1,8 @@
+/* Custom changes to bootstrap */
+@import "_custom";
+/* Bootstrap library */
+@import "~bootstrap/scss/bootstrap";
+/* Frontend styles */
+@import "components";
+@import "login";
+@import "dashboard";

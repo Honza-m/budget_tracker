@@ -11,7 +11,6 @@ router.register(
 )
 
 urlpatterns = [
-    path('summary/', views.ClientSummaryView.as_view()),
-    path('actions/', views.UserClientsActions.as_view())
+    path('summary/', views.ClientSummaryView.as_view())
 ]
 urlpatterns += router.urls

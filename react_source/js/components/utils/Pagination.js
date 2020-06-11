@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class PaginationRow extends React.Component {
+class Pagination extends React.Component {
     constructor(props) {
         super(props)
         this.onClick = this.onClick.bind(this)
@@ -18,6 +18,9 @@ class PaginationRow extends React.Component {
         const currentPage = this.props.res.current_page;
         const firstPage = 1;
         const lastPage = this.props.res.total_pages;
+        const pageSize = this.props.pageSize ? "&page_size="+this.props.pageSize : ""
+        // Return nothing if no need for pagination
+        if (firstPage == lastPage){return null};
         // If this is first page or last page, disable buttons
         const prevDisabled = res.previous ? "" : " disabled";
         const nextDisabled = res.next ? "" : " disabled";
@@ -38,7 +41,7 @@ class PaginationRow extends React.Component {
                 </li>
                 {prevPages.map(i => (
                     <li key={i} className="page-item">
-                        <a className="page-link" href="#" onClick={this.onClick} url={baseURL+"?page="+i}>{i}</a>
+                        <a className="page-link" href="#" onClick={this.onClick} url={baseURL+"?page="+i+pageSize}>{i}</a>
                     </li>
                 ))}
                 <li className="page-item active">
@@ -46,7 +49,7 @@ class PaginationRow extends React.Component {
                 </li>
                 {nextPages.map(i => (
                     <li key={i} className="page-item">
-                        <a className="page-link" href="#" onClick={this.onClick} url={baseURL+"?page="+i}>{i}</a>
+                        <a className="page-link" href="#" onClick={this.onClick} url={baseURL+"?page="+i+pageSize}>{i}</a>
                     </li>
                 ))}
                 <li key={lastPage+1} className={"page-item" + nextDisabled}>
@@ -59,4 +62,4 @@ class PaginationRow extends React.Component {
 }
 
 
-export default PaginationRow
+export default Pagination

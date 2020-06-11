@@ -6,8 +6,9 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
+import 'bootstrap';
 
-import LoginPage from './components/LoginPage';
+import LoginPage from './components/main_components/LoginPage';
 import MainApp from './components/App';
 
 
@@ -23,7 +24,7 @@ function App() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/login/" component={LoginPage} />
+                <Route exact path="/login/" component={LoginPage} />
                 <PrivateRoute path="/" component={MainApp}/>
             </Switch>
         </BrowserRouter>
