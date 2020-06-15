@@ -17,7 +17,7 @@ class EditClients extends React.Component {
             userClients: [],
             redirect: false
         };
-        this.baseURL = props.base;
+        this.baseURL = process.env.BASEURL;
         this.loadData = this.loadData.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
         this.isChecked = this.isChecked.bind(this);

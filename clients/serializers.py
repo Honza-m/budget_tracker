@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Client, Campaign
+from .models import Client, Campaign, ClientPlatform
 
 
 class CurrentUser():
@@ -27,20 +27,17 @@ class ClientSerializer(serializers.ModelSerializer):
     )
 
 
-class CurrentClient():
-    """ Get current client from url """
-    def set_context(self, serializer_field):
-        self.client = serializer_field.kwargs.get('client_pk')
-
-    def __call__(self):
-        return self.client
-
-
 class CampaignSerializer(serializers.ModelSerializer):
     class Meta:
         model = Campaign
         fields = '__all__'
 
-    client = serializers.HiddenField(
-        default=CurrentClient()
-    )
+    client = serializers.HiddenField(default=None)
+
+
+class CLientPlatformSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClientPlatform
+        fields = '__all__'
+
+    client = serializers.HiddenField(default=None)

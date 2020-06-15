@@ -9,7 +9,7 @@ function DashboardNavigation() {
     return (
         <Row>
             <Col>
-                <h1>Test</h1>
+                <h1>Dashboard</h1>
             </Col>
             <Col className="text-right">
                 <Link className="btn btn-primary mt-2" to='/dashboard/select-clients/'>

@@ -1,12 +1,10 @@
 import React from 'react';
-import Masonry from 'react-masonry-css'
+import Masonry from 'react-masonry-css';
 import Card from 'react-bootstrap/Card';
-import {Link} from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 
-
-function ClientCards(props) {
-
+function CampaignCards(props) {
     const breakpointColumnsObj = {
         default: 3,
         992: 3, // lg
@@ -22,12 +20,11 @@ function ClientCards(props) {
             <Card key={i}>
                 <Card.Body>
                 <Card.Title>{item.name}</Card.Title>
-                <Card.Text>Card text</Card.Text>
-                <Link 
-                    className="btn btn-primary"
-                    to={`/client/${item.id}/`}>
-                    Client dashboard
-                </Link>
+                <Card.Text>
+                    Currency: {item.currency} <br />
+                    Is filtered: {item.name_filter ? 'Yes': 'No'}    
+                </Card.Text>
+                <Button variant="primary">Go somewhere</Button>
                 </Card.Body>
             </Card>
         ))}
@@ -35,5 +32,4 @@ function ClientCards(props) {
     )
 }
 
-
-export default ClientCards
+export default CampaignCards

@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
 			isLoaded: false,
 			res: [],
 		};
-		this.baseURL = props.base + 'clients/summary/';
+		this.baseURL = process.env.BASEURL + 'clients/summary/';
 		this.pageSize = 6
 		this.loadData = this.loadData.bind(this);
 	}

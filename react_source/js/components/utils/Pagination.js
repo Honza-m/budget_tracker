@@ -13,7 +13,7 @@ class Pagination extends React.Component {
     }
 
     render() {
-        const baseURL = this.props.baseURL
+        const baseURL = this.props.baseURL;
         const res = this.props.res;
         const currentPage = this.props.res.current_page;
         const firstPage = 1;

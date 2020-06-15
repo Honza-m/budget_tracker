@@ -9,6 +9,11 @@ router.register(
     views.ClientCampaignViewSet,
     basename='client_campaign'
 )
+router.register(
+    '(?P<client_pk>[^/.]+)/platforms',
+    views.ClientPlatformViewSet,
+    basename='client_platforms'
+)
 
 urlpatterns = [
     path('summary/', views.ClientSummaryView.as_view())

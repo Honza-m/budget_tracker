@@ -8,6 +8,9 @@ import {
 
 import Dashboard from './dashboard/Dashboard';
 import EditClients from './dashboard/edit_clients/EditClients';
+import ClientDash from './client_dash/ClientDash';
+import NewCampaign from './client_dash/campaigns/NewCampaign';
+import ClientPlatforms from './client_dash/platforms/ClientPlatforms';
 import Navigation from './main_components/Navigation';
 import LogoutPage from './main_components/LogoutPage';
 
@@ -20,12 +23,12 @@ function MainApp(props) {
         <div className="container">
         <Switch>
           <Route exact path="/logout/" component={LogoutPage} />
-        	<Route exact path="/dashboard/">
-        		<Dashboard base={base}/>
-        	</Route>
-          <Route exact path="/dashboard/select-clients/">
-            <EditClients base={base}/>
-          </Route>
+        	<Route exact path="/dashboard/" component={Dashboard} />
+          <Route exact path="/dashboard/select-clients/" component={EditClients} />
+          <Route exact path="/client/:pk/" component={ClientDash} />
+          <Route exact path="/client/:pk/campaign/new/" component={NewCampaign} />
+          <Route exact path="/client/:pk/platforms/" component={ClientPlatforms} />
+          <Route exact path="/client/:pk/platforms/new/" component={ClientPlatforms} />
           <Route exact path="/test/">
             <h1>Test</h1>
           </Route>

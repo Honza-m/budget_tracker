@@ -7,9 +7,9 @@ PLATFORM_CHOICES = [
 
 
 class Client(mod.Model):
+    """ Entity that you create budgets and campaigns for """
     class Meta:
         ordering = ['name']
-    """ Entity that you create budgets and campaigns for """
     name = mod.CharField(max_length=200)
     organization = mod.ForeignKey('users.Organization', on_delete=mod.CASCADE)
 
@@ -34,6 +34,8 @@ class Spend(mod.Model):
 
 class Campaign(mod.Model):
     """ TODO: docstring """
+    class Meta:
+        ordering = ['name']
     client = mod.ForeignKey('clients.Client', on_delete=mod.CASCADE)
     name = mod.CharField(max_length=300)
     currency = mod.CharField(max_length=3)

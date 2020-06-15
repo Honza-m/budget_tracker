@@ -5,7 +5,7 @@ function Navigation() {
     return (
         <div className="container-fluid p-0">
         <nav className="navbar sticky-top navbar-expand-md navbar-dark bg-dark">
-            <a className="navbar-brand" href="#">Budget Tracker</a>
+            <Link className="navbar-brand" to="/">Budget Tracker</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>

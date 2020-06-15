@@ -2,6 +2,7 @@ from .models import Campaign
 from .models import Client
 from .serializers import CampaignSerializer
 from .serializers import ClientSerializer
+from .serializers import CLientPlatformSerializer
 from utils.pagination import DefaultPagination
 from rest_framework import generics
 from rest_framework import status
@@ -38,10 +39,10 @@ class ClientSummaryView(generics.ListAPIView):
         return self.request.user.clients.all()
 
 
-class ClientCampaignViewSet(viewsets.ModelViewSet):
-    """ Access campaigns belonging to client """
-    serializer_class = CampaignSerializer
-
+class ClientChildMixin:
+    """ Provides common queryset and create method for
+        viewsets that depend on client_pk url
+    """
     def get_queryset(self):
         # Make sure client exists and belongs to the same organization
         client = (
@@ -57,7 +58,19 @@ class ClientCampaignViewSet(viewsets.ModelViewSet):
         return Campaign.objects.filter(client__pk=client.pk).all()
 
     def perform_create(self, serializer):
-        """ Assign client on campaign create """
+        """ Assign client on resource create """
         # No need to check cause already checked in get_queryset
         client = Client.objects.get(pk=self.kwargs['client_pk'])
         serializer.save(client=client)
+
+
+class ClientCampaignViewSet(ClientChildMixin, viewsets.ModelViewSet):
+    """ Access campaigns belonging to client """
+    serializer_class = CampaignSerializer
+    pagination_class = DefaultPagination
+
+
+class ClientPlatformViewSet(ClientChildMixin, viewsets.ModelViewSet):
+    """ Access platforms client advertises on """
+    serializer_class = CLientPlatformSerializer
+    pagination_class = DefaultPagination

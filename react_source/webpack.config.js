@@ -1,6 +1,7 @@
 // import WriteFilePlugin from 'write-file-webpack-plugin';
 const path = require('path');
 const WriteFilePlugin = require('write-file-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: [
@@ -54,6 +55,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new WriteFilePlugin()
+    new WriteFilePlugin(),
+    new webpack.EnvironmentPlugin({
+      BASEURL: 'http://127.0.0.1:8000/api/'
+    })
   ]
 };
