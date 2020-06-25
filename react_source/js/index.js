@@ -8,8 +8,10 @@ import {
 } from "react-router-dom";
 import 'bootstrap';
 
-import LoginPage from './components/main_components/LoginPage';
-import MainApp from './components/App';
+import LoginPage from './login_logout/LoginPage';
+import LogoutPage from './login_logout/LogoutPage';
+import MainSwitch from './MainSwitch';
+
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -25,7 +27,8 @@ function App() {
         <BrowserRouter>
             <Switch>
                 <Route exact path="/login/" component={LoginPage} />
-                <PrivateRoute path="/" component={MainApp}/>
+                <Route exact path="/logout/" component={LogoutPage} />
+                <PrivateRoute exact path="" component={MainSwitch}/>
             </Switch>
         </BrowserRouter>
     ); 

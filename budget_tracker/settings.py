@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'campaign_performance.apps.CampaignPerformanceConfig',
     'clients.apps.ClientsConfig',
     'frontend.apps.FrontendConfig',
     'users.apps.UsersConfig',
