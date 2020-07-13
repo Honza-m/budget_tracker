@@ -1,6 +1,7 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import * as $ from 'jquery';
+import Cookies from 'js-cookie';
+import Button from 'react-bootstrap/Button';
 
 
 class DeleteButton extends React.Component {
@@ -18,7 +19,7 @@ class DeleteButton extends React.Component {
         this.setState({status: 'loading'})
         var x = this;
         console.log(this.url);
-        const token = localStorage.getItem('auth');
+        const token = Cookies.get('auth');
         $.ajax({
             url: x.url,
             type: 'DELETE',

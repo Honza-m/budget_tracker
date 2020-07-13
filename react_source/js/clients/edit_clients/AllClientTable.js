@@ -11,7 +11,7 @@ function AllClientTable(props) {
         <Row>
             <Col><h1>Your clients</h1></Col>
             <Col className="text-right">
-                <Link to="/dashboard/" className="mt-2 mr-1 btn btn-secondary">Cancel</Link> 
+                <Link to="/clients/" className="mt-2 mr-1 btn btn-secondary">Cancel</Link> 
                 <Button variant="success" className="mt-2" onClick={props.saveClients}>Save your clients</Button>
             </Col>
         </Row>

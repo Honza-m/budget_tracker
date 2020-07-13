@@ -6,8 +6,18 @@ import Button from 'react-bootstrap/Button';
 
 
 function NewPlatformForm(props) {
+     if (this.props.nonFieldErrors) {
+            var nonfielderrors = (
+                <Alert variant="danger">
+                    {this.props.nonFieldErrors}
+                </Alert>
+            )    
+        } else {
+            var nonfielderrors = ""
+        }
     return (
         <div>
+        {nonfielderrors}
         <h1 className="text-center">New Platform</h1>
         <Row>
         <Col lg="3"></Col>

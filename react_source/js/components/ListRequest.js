@@ -1,5 +1,6 @@
 import React from 'react';
 import * as $ from 'jquery';
+import Cookies from 'js-cookie';
 import Spinner from 'react-bootstrap/Spinner';
 
 import Pagination from './Pagination';
@@ -24,7 +25,7 @@ class ListRequest extends React.Component {
 
     loadData(url) {
         var x = this;
-        const token = localStorage.getItem('auth');
+        const token = Cookies.get('auth');
         $.ajax({
             url: url,
             type: 'get',

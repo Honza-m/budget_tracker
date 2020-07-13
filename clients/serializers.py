@@ -59,6 +59,39 @@ class BudgetSerializer(serializers.ModelSerializer):
 
     campaign = serializers.HiddenField(default=None)
 
+    def validate(self, data):
+        """ Make sure one campaign only has one budget at any day """
+        budgets = Budget.objects.filter(
+            campaign__pk=self.context['view'].kwargs['campaign_pk']
+        )
+        covered = budgets.values_list('start_date', 'end_date')
+        for each in covered:
+            sd_fail = (
+                data['start_date'] >= each[0] and
+                data['start_date'] <= each[1]
+            )
+            ed_fail = (
+                data['end_date'] >= each[0] and
+                data['end_date'] <= each[1]
+            )
+            over_fail = (
+                each[0] >= data['start_date'] and
+                each[1] <= data['end_date']
+            )
+            if sd_fail:
+                raise serializers.ValidationError({
+                    'start_date': "Start date conflicts with existing budget"
+                })
+            if ed_fail:
+                raise serializers.ValidationError({
+                    'end_date': "End date conflicts with existing budget"
+                })
+            if over_fail:
+                raise serializers.ValidationError(
+                    "Date conflicts with existing budget"
+                )
+        return data
+
 
 class PlatformSerializer(serializers.ModelSerializer):
     class Meta:

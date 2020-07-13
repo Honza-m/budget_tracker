@@ -20,7 +20,7 @@ function PlatformsTable(res, props) {
                 {res.map((item) => (
                     <tr key={item.id}>
                         <td>
-                            <Link to={`/clients/${props.pk}/platforms/${item.id}/spend/`}>
+                            <Link to={`/clients/${props.pk}/campaigns/platforms/${item.id}/spend/`}>
                                 {item.name}
                             </Link>
                         </td>

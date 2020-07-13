@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import Breadcrumbs from './Breadcrumbs';
 
-function Navigation() {
+function Navigation(props) {
     return (
         <div className="container-fluid p-0">
         <nav className="navbar sticky-top navbar-expand-md navbar-dark bg-dark">
@@ -11,14 +12,12 @@ function Navigation() {
             </button>
 
             <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-                <li className="nav-item active">
-                    <Link className="nav-link" to='/dashboard/'>Dashboard</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to='/logout/'>Logout</Link>
-                </li>
-            </ul>
+                <ul className="navbar-nav mr-auto">
+                    <Breadcrumbs urls={props.urls} type="nav" />
+                </ul>
+                <div className="mr-2">
+                    <Link className="btn btn-secondary" to='/logout/'>Logout</Link>
+                </div>
             </div>
 
         </nav>

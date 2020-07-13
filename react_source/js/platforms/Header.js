@@ -16,7 +16,7 @@ function Header(){
             <Col className="text-right">
                 <Link
                     className="mt-2 mr-1 btn btn-success"
-                    to={`/clients/${pk}/platforms/new/`}>
+                    to={`/clients/${pk}/campaigns/platforms/new/`}>
                     Add platform
                 </Link>
             </Col>

@@ -1,5 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -14,8 +15,18 @@ class BudgetForm extends React.Component {
     }
 
     render() {
+        if (this.props.nonFieldErrors) {
+            var nonfielderrors = (
+                <Alert variant="danger">
+                    {this.props.nonFieldErrors}
+                </Alert>
+            )    
+        } else {
+            var nonfielderrors = ""
+        }
         return (
             <div>
+            {nonfielderrors}
             <h1 className="text-center">New Budget</h1>
             <Row>
             <Col lg="3"></Col>

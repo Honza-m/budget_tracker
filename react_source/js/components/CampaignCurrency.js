@@ -1,5 +1,6 @@
 import React from 'react';
 import * as $ from 'jquery';
+import Cookies from 'js-cookie';
 
 
 class CampaignCurrency extends React.Component {
@@ -12,7 +13,7 @@ class CampaignCurrency extends React.Component {
 
     componentDidMount() {
         var x = this;
-        const token = localStorage.getItem('auth');
+        const token = Cookies.get('auth');
         $.ajax({
             url: `${process.env.BASEURL}clients/${this.props.pk}/campaigns/${this.props.camp}/`,
             type: 'get',

@@ -12,7 +12,7 @@ function Header() {
                 <h1>Your clients</h1>
             </Col>
             <Col className="text-right">
-                <Link className="btn btn-primary mt-2" to='/dashboard/select-clients/'>
+                <Link className="btn btn-primary mt-2" to='/clients/select-clients/'>
                     Select your clients
                 </Link>
             </Col>

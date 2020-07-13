@@ -28,13 +28,23 @@ class CampaignForm extends React.Component {
     }
 
     render() {
+         if (this.props.nonFieldErrors) {
+            var nonfielderrors = (
+                <Alert variant="danger">
+                    {this.props.nonFieldErrors}
+                </Alert>
+            )    
+        } else {
+            var nonfielderrors = ""
+        }
         return (
             <div>
+            {nonfielderrors}
             <h1 className="text-center">New Campaign</h1>
             <Row>
             <Col lg="3"></Col>
             <Col>
-            <Form>
+            <Form onSubmit={this.props.submitForm}>
                 <Form.Row>
                     <Col>
                     <Form.Group>

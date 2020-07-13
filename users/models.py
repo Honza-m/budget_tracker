@@ -8,13 +8,35 @@ class UserManager(BaseUserManager):
     use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
-        """Create and save a User with the given email and password."""
+        """ Create and save a new organization with User
+            (password optional)
+        """
+        # Check arguments
         if not email:
             raise ValueError('The given email must be set')
+
+        # Create user
         email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
-        user.set_password(password)
+        user = self.model(
+            email=email,
+            **extra_fields
+        )
+
+        # Decide on password
+        if password is None:
+            user.set_unusable_password()
+        else:
+            user.set_password(password)
+
+        # Create organization if none provided
+        if extra_fields.get('organization') is None:
+            org = Organization(name="SIGNUPDUMMY")
+            org.save(using=self._db)
+            user.organization = org
+            user.organization_owner = True
+
         user.save(using=self._db)
+
         return user
 
     def create_user(self, email, password=None, **extra_fields):
@@ -42,8 +64,8 @@ class User(AbstractUser):
     email = mod.EmailField(unique=True)
     organization = mod.ForeignKey(
         'users.Organization', on_delete=mod.CASCADE,
-        null=True, blank=True
     )
+    organization_owner = mod.BooleanField(default=False)
     clients = mod.ManyToManyField('clients.Client', blank=True)
 
     USERNAME_FIELD = 'email'

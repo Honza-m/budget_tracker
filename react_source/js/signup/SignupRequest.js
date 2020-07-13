@@ -1,28 +1,26 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
 import * as $ from 'jquery';
-import Cookies from 'js-cookie';
 
-// Supply fields as props
-// fields = {field1: 'initialvalue', field2: 'intitial'}
-// Supply url as props
-// Supply form JSX as props
-class CreateRequest extends React.Component {
+
+class SignupRequest extends React.Component {
     constructor(props) {
         super(props);
 
         // Expected props
         const fields = this.props.fields;
-        this.url = this.props.url;
         this.redirect = this.props.redirect;
+        this.url = this.props.url;
         this.form = this.props.form;
+        this.type = this.props.type;
 
         this.state = {
             loading: false,
             errors: false,
             submitted: false,
             fields: fields
-        };
+        }
+
         this.updateField = this.updateField.bind(this);
         this.submitForm = this.submitForm.bind(this);
     }
@@ -50,19 +48,15 @@ class CreateRequest extends React.Component {
     submitForm(e) {
         e.preventDefault();
         this.setState({loading: true});
-        if (this.props.dontAuthorize) {
-            var headers = {}
-        } else {
-            const token = Cookies.get('auth');
-            var headers = {'Authorization': `Token ${token}`};
-        }
         var x = this;
+        const fields = x.state.fields;
+        fields['uid'] = sessionStorage.getItem('signup-uid')
+        fields['token'] = sessionStorage.getItem('signup-token')
         $.ajax({
             url: this.url,
-            type: 'POST',
+            type: this.type,
             data: JSON.stringify(x.state.fields),
             contentType: 'application/json',
-            headers: headers,
         })
         .done((res) => {
             x.setState({
@@ -107,4 +101,4 @@ class CreateRequest extends React.Component {
     }
 }
 
-export default CreateRequest
+export default SignupRequest

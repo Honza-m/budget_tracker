@@ -1,5 +1,4 @@
 from django.db import models as mod
-from django.utils import timezone
 
 PLATFORM_CHOICES = [
     ('manual', 'Manual data import')

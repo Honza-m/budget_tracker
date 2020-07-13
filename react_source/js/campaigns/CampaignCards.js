@@ -2,6 +2,7 @@ import React from 'react';
 import {Link, useParams} from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 import Card from 'react-bootstrap/Card';
+import CampaignSnapshot from './CampaignSnapshot';
 
 
 function CampaignCards(props) {
@@ -21,10 +22,10 @@ function CampaignCards(props) {
             <Card key={i}>
                 <Card.Body>
                 <Card.Title>{item.name}</Card.Title>
-                <Card.Text>
-                    Currency: {item.currency} <br />
-                    Is filtered: {item.name_filter ? 'Yes': 'No'}    
-                </Card.Text>
+                    <CampaignSnapshot
+                        currency={item.currency}
+                        camp={item.id}
+                    />
                 <Link 
                     className="btn btn-primary"
                     to={`/clients/${pk}/campaigns/${item.id}/`}

@@ -1,5 +1,5 @@
 import React from 'react';
-import Masonry from 'react-masonry-css'
+import Masonry from 'react-masonry-css';
 import Card from 'react-bootstrap/Card';
 import {Link} from 'react-router-dom';
 

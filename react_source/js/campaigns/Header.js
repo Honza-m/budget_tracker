@@ -22,7 +22,7 @@ function Header(){
                 <Link
                     variant="secondary"
                     className="mt-2 btn btn-secondary"
-                    to={`/clients/${pk}/platforms/`}>
+                    to={`/clients/${pk}/campaigns/platforms/`}>
                     Spend
                 </Link>
             </Col>

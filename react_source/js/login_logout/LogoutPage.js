@@ -1,10 +1,11 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 
 function LogoutPage() {
 	// Remove cookie with token
-	localStorage.removeItem('auth');
+	Cookies.remove('auth');
 	return <Redirect to="/login/" />
 }
 

@@ -16,7 +16,7 @@ function NewPlatform() {
     return (
         <CreateRequest
             url={url}
-            redirect={`/clients/${pk}/platforms/`}
+            redirect={`/clients/${pk}/campaigns/platforms/`}
             fields={fields}
             form={PlatformForm}
         />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import * as $ from 'jquery';
+import Cookies from 'js-cookie';
 
 import LoginForm from './LoginForm';
 
@@ -27,7 +28,7 @@ class LoginPage extends React.Component {
 		e.preventDefault();
 		// Real authentication
 		$.post(
-			"http://127.0.0.1:8000/api/auth/",
+			`${process.env.BASEURL}auth/`,
 			{
 				'username': this.state.email,
 				'password': this.state.password
@@ -56,8 +57,8 @@ class LoginPage extends React.Component {
 				/>
 			)
 		} else {
-			localStorage.setItem('auth', this.state.token);
-			return <Redirect to='/dashboard/' />
+			Cookies.set('auth', this.state.token, {expires: 7});
+			return <Redirect to='/clients/' />
 		}
 	}
 

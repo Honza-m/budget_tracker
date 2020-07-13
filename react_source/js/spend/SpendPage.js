@@ -20,7 +20,7 @@ function SpendPage() {
             <Col className="text-right">
                 <Link 
                     className="btn btn-success mt-2"
-                    to={`/clients/${pk}/platforms/${plat}/spend/upload/`}
+                    to={`/clients/${pk}/campaigns/platforms/${plat}/spend/upload/`}
                 >
                     Upload spend
                 </Link>

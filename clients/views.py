@@ -27,10 +27,15 @@ class ClientViewSet(viewsets.ModelViewSet):
     pagination_class = DefaultPagination
 
     def get_queryset(self):
-        return self.request.user.clients.all()
+        clients = (
+            Client.objects
+            .filter(organization=self.request.user.organization)
+        )
+        return clients
 
     def perform_create(self, serializer):
         """ Add client to user's clients on create """
+        # Organization gets added in serializer
         client = serializer.save()
         self.request.user.clients.add(client)
 

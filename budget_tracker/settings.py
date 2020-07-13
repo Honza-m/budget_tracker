@@ -26,6 +26,7 @@ if os.environ['ENV'] == 'PRODUCTION':
     DEBUG = False
 else:
     DEBUG = True
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -149,3 +150,4 @@ REST_FRAMEWORK = {
 APPEND_SLASH = True
 LOGIN_REDIRECT_URL = '/app/dash/'
 LOGOUT_REDIRECT_URL = '/'
+PASSWORD_RESET_TIMEOUT_DAYS = 7

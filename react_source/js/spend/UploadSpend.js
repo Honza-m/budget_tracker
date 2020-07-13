@@ -1,5 +1,6 @@
 import React from 'react';
 import * as $ from 'jquery';
+import Cookies from 'js-cookie';
 import {withRouter, Redirect} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -19,14 +20,14 @@ class UploadSpend extends React.Component {
         this.pk = this.props.match.params.pk;
         this.plat = this.props.match.params.plat;
         this.url = `${process.env.BASEURL}clients/${this.pk}/platforms/${this.plat}/spend/upload/`;
-        this.redirect = `/clients/${this.pk}/platforms/${this.plat}/spend/`;
+        this.redirect = `/clients/${this.pk}/campaigns/platforms/${this.plat}/spend/`;
         this.submitForm = this.submitForm.bind(this);
     }
 
     submitForm(e) {
         this.setState({loading: true});
         var x = this;
-        const token = localStorage.getItem('auth');
+        const token = Cookies.get('auth');
 
         var fdata = new FormData();
         fdata.append("csvfile", this.fileInput.current.files[0]);

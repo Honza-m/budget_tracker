@@ -6,17 +6,19 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
+import Cookies from 'js-cookie';
 import 'bootstrap';
 
 import LoginPage from './login_logout/LoginPage';
 import LogoutPage from './login_logout/LogoutPage';
 import MainSwitch from './MainSwitch';
+import SignupSwitch from './signup/_Switch';
 
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
-    localStorage.getItem('auth')
+    Cookies.get('auth')
       ? <Component {...props} />
       : <Redirect to="/login/" />
   )} />
@@ -28,7 +30,8 @@ function App() {
             <Switch>
                 <Route exact path="/login/" component={LoginPage} />
                 <Route exact path="/logout/" component={LogoutPage} />
-                <PrivateRoute exact path="" component={MainSwitch}/>
+                <Route path="/signup/" component={SignupSwitch} />
+                <PrivateRoute path="" component={MainSwitch}/>
             </Switch>
         </BrowserRouter>
     ); 

@@ -1,7 +1,8 @@
 import React from 'react';
-import * as $ from 'jquery';
-import Spinner from 'react-bootstrap/Spinner';
 import { Redirect } from 'react-router-dom';
+import * as $ from 'jquery';
+import Cookies from 'js-cookie';
+import Spinner from 'react-bootstrap/Spinner';
 
 import Pagination from '../../components/Pagination';
 import AllClientTable from './AllClientTable';
@@ -27,7 +28,7 @@ class EditClients extends React.Component {
     loadData(url) {
         // Load pages of allClients
         var x = this;
-        const token = localStorage.getItem('auth');
+        const token = Cookies.get('auth');
         $.ajax({
             url: url,
             type: 'get',
@@ -50,7 +51,7 @@ class EditClients extends React.Component {
     componentDidMount() {
         // Get a list of all users 
         var x = this;
-        const token = localStorage.getItem('auth');
+        const token = Cookies.get('auth');
         $.ajax({
             url: x.baseURL + 'users/client-set/',
             type: 'get',
@@ -94,7 +95,7 @@ class EditClients extends React.Component {
     saveClients(e) {
         e.preventDefault();
         var x = this;
-        const token = localStorage.getItem('auth');
+        const token = Cookies.get('auth');
         $.ajax({
             url: x.baseURL + 'users/client-set/',
             type: 'POST',
@@ -123,7 +124,7 @@ class EditClients extends React.Component {
                 </div>
             );
         } else if (redirect) {
-            return <Redirect to="/dashboard/"/>
+            return <Redirect to="/clients/"/>
         } else {
             return (
                 <div>
